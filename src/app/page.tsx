@@ -128,7 +128,7 @@ export default function Home() {
       {/* Navbar */}
       <nav className="fixed w-full top-0 left-0 z-50 bg-gray-900/90 backdrop-blur-md border-b border-gray-700/50">
         <div className="max-w-6xl mx-auto flex justify-between items-center px-6 py-4">
-          <h1 className="text-xl font-bold tracking-wider bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">My Portfolio</h1>
+          <h1 className="text-xl font-bold tracking-wider bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Azzammil Akbar Ramadhan</h1>
           <div className="space-x-6 text-sm uppercase">
             <Link to="profile" smooth duration={600} className="hover:text-blue-400 cursor-pointer transition">
               Profile
@@ -152,8 +152,10 @@ export default function Home() {
       {/* Profile Section */}
       <Element name="profile">
         <section className="relative flex flex-col md:flex-row items-center justify-center text-center md:text-left min-h-screen px-6 overflow-hidden">
+
           {/* Background animated gradient blobs */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {/* Bulat blur */}
             <motion.div
               animate={{ x: [0, 100, 0], y: [0, -100, 0], scale: [1, 1.2, 1] }}
               transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
@@ -198,7 +200,7 @@ export default function Home() {
             >
               <div className="absolute w-[330px] h-[330px]">
                 <div
-                  className="absolute inset-0 border-[6px] border-transparent border-t-blue-500 border-r-blue-500 rounded-full"
+                  className="absolute inset-0 border-[6px] border-transparent border-t-blue-500 border-b-purple-500 rounded-full"
                   style={{
                     width: "100%",
                     height: "100%",
@@ -208,7 +210,6 @@ export default function Home() {
               </div>
             </motion.div>
           </div>
-
 
           {/* Profile Info */}
           <motion.div
@@ -262,7 +263,7 @@ export default function Home() {
 
             {/* Typing Animation - Full Profile Description */}
             <motion.p
-              className="text-gray-300 leading-relaxed text-lg"
+              className="text-gray-300 leading-relaxed text-lg text-justify"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
             >
@@ -278,7 +279,7 @@ export default function Home() {
                   },
                 }}
               >
-                {"I'm Azzammil Akbar Ramadhan, a passionate Computer Engineering graduate from Padang State Polytechnic. With a strong specialization in web programming and mobile app development, I'm also proficient in networking and digital infrastructure, including cloud computing and network device configuration. This portfolio is a testament to my dedication and technical skills in realizing innovative and scalable digital solutions."
+                {"I am a Computer Engineering graduate from Padang State Polytechnic with expertise spanning network engineering, cloud computing, as well as web and mobile application development. I am proficient in designing, configuring, and maintaining network infrastructures, managing cloud solutions, and developing efficient digital applications. This portfolio showcases my dedication and technical skills in delivering innovative, reliable, and scalable digital solutions."
                   .split("")
                   .map((char, i) => (
                     <motion.span
@@ -299,23 +300,39 @@ export default function Home() {
               target="_blank"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-block mt-6 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg shadow-lg transition"
+              className="
+        inline-block mt-6 px-6 py-3
+        font-semibold rounded-lg transition-all duration-300
+        border-2 border-blue-500
+        bg-transparent text-white
+        hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-500
+        hover:text-white
+        shadow-lg hover:shadow-purple-400/40"
             >
-              📄 Resume
+              My Resume
             </motion.a>
           </motion.div>
-
         </section>
-
       </Element>
+
 
       {/* Projects Section */}
       <Element name="projects">
         <section className="py-20 bg-gradient-to-b from-gray-900 to-gray-800 relative overflow-hidden">
           {/* Subtle background effect */}
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-40 left-20 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-40 right-20 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl"></div>
+          {/* Background animated gradient blobs */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {/* Bulat blur */}
+            <motion.div
+              animate={{ x: [0, 100, 0], y: [0, -100, 0], scale: [1, 1.2, 1] }}
+              transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-20 left-10 w-[28rem] h-[28rem] bg-blue-500/10 rounded-full blur-3xl"
+            />
+            <motion.div
+              animate={{ x: [0, -100, 0], y: [0, 100, 0], scale: [1, 1.3, 1] }}
+              transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute bottom-20 right-10 w-[28rem] h-[28rem] bg-purple-500/10 rounded-full blur-3xl"
+            />
           </div>
 
           <motion.h2
@@ -463,10 +480,19 @@ export default function Home() {
       <Element name="certificate">
         <section className="py-20 bg-gray-800 text-center relative overflow-hidden">
 
-          {/* Background effect */}
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-10 left-20 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-10 right-20 w-72 h-72 bg-purple-500/5 rounded-full blur-3xl"></div>
+          {/* Background animated gradient blobs */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {/* Bulat blur */}
+            <motion.div
+              animate={{ x: [0, 100, 0], y: [0, -100, 0], scale: [1, 1.2, 1] }}
+              transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-20 left-10 w-[28rem] h-[28rem] bg-blue-500/10 rounded-full blur-3xl"
+            />
+            <motion.div
+              animate={{ x: [0, -100, 0], y: [0, 100, 0], scale: [1, 1.3, 1] }}
+              transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute bottom-20 right-10 w-[28rem] h-[28rem] bg-purple-500/10 rounded-full blur-3xl"
+            />
           </div>
 
           {/* Title */}
@@ -533,9 +559,60 @@ export default function Home() {
       <Element name="skills">
         <section className="py-20 bg-gradient-to-b from-gray-800 to-gray-900 text-center relative overflow-hidden">
           {/* Background effect */}
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-20 right-40 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-20 left-40 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl"></div>
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {/* Bulat blur */}
+            <motion.div
+              animate={{ x: [0, 100, 0], y: [0, -100, 0], scale: [1, 1.2, 1] }}
+              transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-20 left-10 w-[28rem] h-[28rem] bg-blue-500/10 rounded-full blur-3xl"
+            />
+            <motion.div
+              animate={{ x: [0, -100, 0], y: [0, 100, 0], scale: [1, 1.3, 1] }}
+              transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute bottom-20 right-10 w-[28rem] h-[28rem] bg-purple-500/10 rounded-full blur-3xl"
+            />
+
+            {/* Kotak bergerak random */}
+            {Array.from({ length: 12 }).map((_, i) => {
+              const size = [12, 14, 16, 20][Math.floor(Math.random() * 4)];
+              const color = [
+                "bg-blue-300/20",
+                "bg-purple-300/20",
+                "bg-blue-400/20",
+                "bg-purple-400/20",
+              ][Math.floor(Math.random() * 4)];
+
+              const duration = 15 + Math.random() * 15; // durasi acak 15-30s
+
+              // posisi awal acak di layar
+              const top = `${Math.random() * 100}vh`;
+              const left = `${Math.random() * 100}vw`;
+
+              const xAnim = [
+                `${-50 + Math.random() * 100}vw`,
+                `${-50 + Math.random() * 100}vw`,
+                `${-50 + Math.random() * 100}vw`,
+                "0vw",
+              ];
+              const yAnim = [
+                `${-50 + Math.random() * 100}vh`,
+                `${-50 + Math.random() * 100}vh`,
+                `${-50 + Math.random() * 100}vh`,
+                "0vh",
+              ];
+
+              const rotateAnim = [0, 90, 180, 360];
+
+              return (
+                <motion.div
+                  key={i}
+                  animate={{ x: xAnim, y: yAnim, rotate: rotateAnim }}
+                  transition={{ duration: duration, repeat: Infinity, ease: "easeInOut" }}
+                  className={`absolute w-${size} h-${size} ${color} rounded-lg`}
+                  style={{ top, left }}
+                />
+              );
+            })}
           </div>
 
           <motion.h2
