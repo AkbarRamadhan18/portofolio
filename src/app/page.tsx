@@ -1,9 +1,12 @@
 "use client";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Link, Element } from "react-scroll";
 import { FaGithub, FaLinkedin, FaInstagram, FaFacebook, FaWhatsapp } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import { useState } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
+
 
 // Timeline Item Component
 interface TimelineItemProps {
@@ -123,30 +126,77 @@ export default function Home() {
     },
   ];
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+
+  const menuItems = [
+    { name: "Profile", to: "profile" },
+    { name: "Projects", to: "projects" },
+    { name: "Certificates", to: "certificate" },
+    { name: "Skills", to: "skills" },
+    { name: "Contact", to: "contact" },
+  ];
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white font-sans">
       {/* Navbar */}
       <nav className="fixed w-full top-0 left-0 z-50 bg-gray-900/90 backdrop-blur-md border-b border-gray-700/50">
         <div className="max-w-6xl mx-auto flex justify-between items-center px-6 py-4">
-          <h1 className="text-xl font-bold tracking-wider bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Azzammil Akbar Ramadhan</h1>
-          <div className="space-x-6 text-sm uppercase">
-            <Link to="profile" smooth duration={600} className="hover:text-blue-400 cursor-pointer transition">
-              Profile
-            </Link>
-            <Link to="projects" smooth duration={600} className="hover:text-blue-400 cursor-pointer transition">
-              Projects
-            </Link>
-            <Link to="certificate" smooth duration={600} className="hover:text-blue-400 cursor-pointer transition">
-              Certificates
-            </Link>
-            <Link to="skills" smooth duration={600} className="hover:text-blue-400 cursor-pointer transition">
-              Skills
-            </Link>
-            <Link to="contact" smooth duration={600} className="hover:text-blue-400 cursor-pointer transition">
-              Contact
-            </Link>
+          <h1 className="text-xl font-bold tracking-wider bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            Azzammil Akbar Ramadhan
+          </h1>
+
+          {/* Desktop Menu */}
+          <div className="hidden md:flex space-x-6 text-sm uppercase">
+            {menuItems.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                smooth
+                duration={600}
+                className="hover:text-blue-400 cursor-pointer transition"
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
+            <button onClick={toggleMenu} className="text-white text-2xl focus:outline-none">
+              {isOpen ? <FaTimes /> : <FaBars />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile Dropdown Menu */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden overflow-hidden bg-gray-900/95 backdrop-blur-md border-t border-gray-700/50"
+            >
+              <div className="flex flex-col items-center py-4 space-y-4 text-sm uppercase">
+                {menuItems.map((item) => (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    smooth
+                    duration={600}
+                    onClick={() => setIsOpen(false)}
+                    className="hover:text-blue-400 cursor-pointer transition"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* Profile Section */}
@@ -155,7 +205,7 @@ export default function Home() {
 
           {/* Background animated gradient blobs */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {/* Bulat blur */}
+            {/* Gradient Blur Blobs */}
             <motion.div
               animate={{ x: [0, 100, 0], y: [0, -100, 0], scale: [1, 1.2, 1] }}
               transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
@@ -166,7 +216,39 @@ export default function Home() {
               transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
               className="absolute bottom-20 right-10 w-[28rem] h-[28rem] bg-purple-500/10 rounded-full blur-3xl"
             />
+
+            {/* Kubus Transparan Berterbangan */}
+            {[...Array(20)].map((_, i) => (
+              <motion.div
+                key={i}
+                animate={{
+                  x: [
+                    0,
+                    Math.random() * 800 - 400, // bergerak random horizontal
+                    0
+                  ],
+                  y: [
+                    0,
+                    Math.random() * 600 - 300, // bergerak random vertikal
+                    0
+                  ],
+                  rotate: [0, 360, 0],
+                  scale: [0.5, Math.random() * 0.7 + 0.5, 0.5]
+                }}
+                transition={{
+                  duration: Math.random() * 15 + 10,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="absolute w-12 h-12 bg-white/10 border border-white/20 rounded-md shadow-md"
+                style={{
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`
+                }}
+              />
+            ))}
           </div>
+
 
           {/* Profile Image */}
           <div className="relative z-10 w-72 h-72">
@@ -322,7 +404,7 @@ export default function Home() {
           {/* Subtle background effect */}
           {/* Background animated gradient blobs */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {/* Bulat blur */}
+            {/* Gradient Blur Blobs */}
             <motion.div
               animate={{ x: [0, 100, 0], y: [0, -100, 0], scale: [1, 1.2, 1] }}
               transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
@@ -333,6 +415,37 @@ export default function Home() {
               transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
               className="absolute bottom-20 right-10 w-[28rem] h-[28rem] bg-purple-500/10 rounded-full blur-3xl"
             />
+
+            {/* Kubus Transparan Berterbangan */}
+            {[...Array(20)].map((_, i) => (
+              <motion.div
+                key={i}
+                animate={{
+                  x: [
+                    0,
+                    Math.random() * 800 - 400, // bergerak random horizontal
+                    0
+                  ],
+                  y: [
+                    0,
+                    Math.random() * 600 - 300, // bergerak random vertikal
+                    0
+                  ],
+                  rotate: [0, 360, 0],
+                  scale: [0.5, Math.random() * 0.7 + 0.5, 0.5]
+                }}
+                transition={{
+                  duration: Math.random() * 15 + 10,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="absolute w-12 h-12 bg-white/10 border border-white/20 rounded-md shadow-md"
+                style={{
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`
+                }}
+              />
+            ))}
           </div>
 
           <motion.h2
@@ -482,7 +595,7 @@ export default function Home() {
 
           {/* Background animated gradient blobs */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {/* Bulat blur */}
+            {/* Gradient Blur Blobs */}
             <motion.div
               animate={{ x: [0, 100, 0], y: [0, -100, 0], scale: [1, 1.2, 1] }}
               transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
@@ -493,6 +606,37 @@ export default function Home() {
               transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
               className="absolute bottom-20 right-10 w-[28rem] h-[28rem] bg-purple-500/10 rounded-full blur-3xl"
             />
+
+            {/* Kubus Transparan Berterbangan */}
+            {[...Array(20)].map((_, i) => (
+              <motion.div
+                key={i}
+                animate={{
+                  x: [
+                    0,
+                    Math.random() * 800 - 400, // bergerak random horizontal
+                    0
+                  ],
+                  y: [
+                    0,
+                    Math.random() * 600 - 300, // bergerak random vertikal
+                    0
+                  ],
+                  rotate: [0, 360, 0],
+                  scale: [0.5, Math.random() * 0.7 + 0.5, 0.5]
+                }}
+                transition={{
+                  duration: Math.random() * 15 + 10,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="absolute w-12 h-12 bg-white/10 border border-white/20 rounded-md shadow-md"
+                style={{
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`
+                }}
+              />
+            ))}
           </div>
 
           {/* Title */}
@@ -554,13 +698,12 @@ export default function Home() {
       </Element>
 
 
-
       {/* Skills Section */}
       <Element name="skills">
         <section className="py-20 bg-gradient-to-b from-gray-800 to-gray-900 text-center relative overflow-hidden">
           {/* Background effect */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {/* Bulat blur */}
+            {/* Gradient Blur Blobs */}
             <motion.div
               animate={{ x: [0, 100, 0], y: [0, -100, 0], scale: [1, 1.2, 1] }}
               transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
@@ -572,47 +715,36 @@ export default function Home() {
               className="absolute bottom-20 right-10 w-[28rem] h-[28rem] bg-purple-500/10 rounded-full blur-3xl"
             />
 
-            {/* Kotak bergerak random */}
-            {Array.from({ length: 12 }).map((_, i) => {
-              const size = [12, 14, 16, 20][Math.floor(Math.random() * 4)];
-              const color = [
-                "bg-blue-300/20",
-                "bg-purple-300/20",
-                "bg-blue-400/20",
-                "bg-purple-400/20",
-              ][Math.floor(Math.random() * 4)];
-
-              const duration = 15 + Math.random() * 15; // durasi acak 15-30s
-
-              // posisi awal acak di layar
-              const top = `${Math.random() * 100}vh`;
-              const left = `${Math.random() * 100}vw`;
-
-              const xAnim = [
-                `${-50 + Math.random() * 100}vw`,
-                `${-50 + Math.random() * 100}vw`,
-                `${-50 + Math.random() * 100}vw`,
-                "0vw",
-              ];
-              const yAnim = [
-                `${-50 + Math.random() * 100}vh`,
-                `${-50 + Math.random() * 100}vh`,
-                `${-50 + Math.random() * 100}vh`,
-                "0vh",
-              ];
-
-              const rotateAnim = [0, 90, 180, 360];
-
-              return (
-                <motion.div
-                  key={i}
-                  animate={{ x: xAnim, y: yAnim, rotate: rotateAnim }}
-                  transition={{ duration: duration, repeat: Infinity, ease: "easeInOut" }}
-                  className={`absolute w-${size} h-${size} ${color} rounded-lg`}
-                  style={{ top, left }}
-                />
-              );
-            })}
+            {/* Kubus Transparan Berterbangan */}
+            {[...Array(20)].map((_, i) => (
+              <motion.div
+                key={i}
+                animate={{
+                  x: [
+                    0,
+                    Math.random() * 800 - 400, // bergerak random horizontal
+                    0
+                  ],
+                  y: [
+                    0,
+                    Math.random() * 600 - 300, // bergerak random vertikal
+                    0
+                  ],
+                  rotate: [0, 360, 0],
+                  scale: [0.5, Math.random() * 0.7 + 0.5, 0.5]
+                }}
+                transition={{
+                  duration: Math.random() * 15 + 10,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="absolute w-12 h-12 bg-white/10 border border-white/20 rounded-md shadow-md"
+                style={{
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`
+                }}
+              />
+            ))}
           </div>
 
           <motion.h2
@@ -776,20 +908,51 @@ export default function Home() {
       <Element name="contact">
         <section className="py-20 px-6 text-center bg-gradient-to-b from-gray-900 to-black relative overflow-hidden">
           {/* Background effect */}
-          <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {/* Gradient Blur Blobs Gelap */}
             <motion.div
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.3, 0.5, 0.3],
-              }}
-              transition={{
-                duration: 8,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"
+              animate={{ x: [0, 100, 0], y: [0, -100, 0], scale: [1, 1.2, 1] }}
+              transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-20 left-10 w-[28rem] h-[28rem] bg-blue-900/20 rounded-full blur-3xl"
             />
+            <motion.div
+              animate={{ x: [0, -100, 0], y: [0, 100, 0], scale: [1, 1.3, 1] }}
+              transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute bottom-20 right-10 w-[28rem] h-[28rem] bg-purple-900/20 rounded-full blur-3xl"
+            />
+
+            {/* Kubus Gelap Berterbangan */}
+            {[...Array(20)].map((_, i) => (
+              <motion.div
+                key={i}
+                animate={{
+                  x: [
+                    0,
+                    Math.random() * 800 - 400,
+                    0
+                  ],
+                  y: [
+                    0,
+                    Math.random() * 600 - 300,
+                    0
+                  ],
+                  rotate: [0, 360, 0],
+                  scale: [0.5, Math.random() * 0.7 + 0.5, 0.5]
+                }}
+                transition={{
+                  duration: Math.random() * 15 + 10,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="absolute w-12 h-12 bg-gray-800/30 border border-gray-700/40 rounded-md shadow-md"
+                style={{
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`
+                }}
+              />
+            ))}
           </div>
+
 
           <motion.h2
             initial={{ y: 50, opacity: 0 }}
